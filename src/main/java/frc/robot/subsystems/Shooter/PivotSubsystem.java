@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.generated.Constants.LimeLightConstants;
 import frc.robot.generated.Constants.PivotConstants;
 import frc.robot.generated.Constants.ShooterConstants;;
 
@@ -63,14 +64,14 @@ public void setVelocity(double setPoint)
 m_pviot.set(setPoint);
 }
 
-private void setPosition(double setPoint)
+public void setPosition(double setPoint)
 {
   m_pidController.setReference(setPoint, CANSparkMax.ControlType.kPosition);
 }
 
 public void intakePosition()
 {
-  m_pidController.setReference(12.5, CANSparkMax.ControlType.kPosition);
+  m_pidController.setReference(9.95, CANSparkMax.ControlType.kPosition);
 }
 
 public void subwooferPosition()
@@ -83,17 +84,21 @@ public void otherPositions()
   m_pidController.setReference(12.5, CANSparkMax.ControlType.kPosition);
 }
 
-public Command withCalculatedPosition(double distance)
+public double getDistance(double ty)
 {
-  //height / distance
-  //feet
-  double c_setPoint = Math.atan( 10 / distance);
-  return runOnce(() -> this.setPosition(c_setPoint));
+    return (LimeLightConstants.limelightLensHeightInches - LimeLightConstants.goalHeightInches) / 
+    Math.abs(Math.toRadians(LimeLightConstants.limelightMountAngledegrees) + Math.toRadians(ty));
+
 }
 
 public Command withPosition(double setPoint)
 {
-  return runOnce(() -> this.setPosition(setPoint));
+  return run(() -> this.setPosition(setPoint));
+}
+
+public Command lightlightAutoAim (double ty) {
+
+  return run(() -> this.setPosition(((this.getDistance(ty) - 36.125)*0.1194) +24.96));
 }
 
 public Command slowUp()
@@ -111,6 +116,11 @@ public Command stop()
   return run(() -> this.setVelocity(0));
 }
 
+public Command holdPosition()
+{
+  return run(() -> this.setPosition(this.m_encoder.getPosition()));
+}
+
 
 
 public boolean LimitChecks()
@@ -123,6 +133,7 @@ public void periodic() {
   // This method will be called once per scheduler run
 SmartDashboard.putNumber("Shooter Pivot Encoder", m_encoder.getPosition());
 SmartDashboard.putNumber("Shooter Pivot Appied Voltage", m_pviot.getAppliedOutput() );
+
 }
 
 
