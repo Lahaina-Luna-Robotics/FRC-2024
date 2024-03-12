@@ -7,8 +7,26 @@ The code is using Java with the following libraries
 - CTRE
 - RevRobotics
 - Path planner
+
 Code is using the **command base** programming.
 
+## Possibilities
+### Autonomous
+- score first note (possible 5 points)
+- score first note and move back (possible 7 points)
+- score first note, move back, intake and shoot from that position (possible 12 points)
+- score first note, move back, intake, shoot from position, drive to middle, intake (possible 12 points with field placement advantage)
+- '' drive up to max position to shoot and shoot (possible 17 points)
+- '' X times where X is as much notes on the field
+
+'' = same as above
+
+### Teleporation
+- Amp
+- speaker
+- Climb
+- Trap (possible)
+- Shoot in trap (a hail mary)
 
 ## Controls
 | button/joystick controls | action|
