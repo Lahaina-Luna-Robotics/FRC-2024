@@ -1,6 +1,16 @@
-Offical Lahaina Luna code and controls  
+# Offical Lahaina Luna code and controls for the FRC game 2024 CRESENDO
 
-# Controls
+## Description
+The code is using Java with the following libraries
+- WPILib
+- Limelight
+- CTRE
+- RevRobotics
+- Path planner
+Code is using the **command base** programming.
+
+
+## Controls
 | button/joystick controls | action|
 |---|---|
 |**DRIVER CONTROLS**|
@@ -28,3 +38,11 @@ Offical Lahaina Luna code and controls
 |Button 3 | Climb |
 
 
+## Collaborators
+### Mentors
+- Preston
+- Kalani
+### Students
+- Chase
+- Darren
+- Marie
